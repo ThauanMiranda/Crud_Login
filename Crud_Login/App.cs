@@ -1,21 +1,12 @@
 using Crud_Login.models;
+using Crud_Login.views;
 
 namespace Crud_Login {
     internal static class App {
         [STAThread]
         static void Main() {
-            //ApplicationConfiguration.Initialize();
-            //Application.Run();
-
-            IUsuarioRepository usuarioRep = new UsuarioRepository();
-
-            Usuario usuario = new Usuario();
-            usuario.email = "jonas@gmail.com";
-            usuario.senha = "JonasDias123";
-            
-            usuarioRep.salvar(usuario);
-
-
+            ApplicationConfiguration.Initialize();
+            Application.Run(new TelaLogin());
         }
     }
 }

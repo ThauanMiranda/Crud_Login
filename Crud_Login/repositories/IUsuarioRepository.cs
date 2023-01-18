@@ -8,7 +8,6 @@ namespace Crud_Login {
         public void deletar(Usuario usuario);
         public void atualizar(Usuario usuario);
         public Usuario getPorId(int id);
-        public List<Usuario> getPorNome(string nome);
         public List<Usuario> getTodos();
 
     }

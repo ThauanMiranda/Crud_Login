@@ -37,7 +37,11 @@ namespace Crud_Login {
         }
 
         public void atualizar(Usuario usuario) {
-            throw new NotImplementedException();
+            string query = "UPDATE usuario SET " +
+                "email = '" + usuario.email + "', " +
+                "senha = '" + usuario.senha + "'" +
+                "WHERE id = " + usuario.id + ";";
+            executarComando(query);
         }
 
         public void deletar(Usuario usuario) {
@@ -70,10 +74,6 @@ namespace Crud_Login {
                 conexaoBd.Close();
             }
             return null!;
-        }
-
-        public List<Usuario> getPorNome(string nome) {
-            throw new NotImplementedException();
         }
 
         public List<Usuario> getTodos() {
