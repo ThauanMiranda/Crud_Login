@@ -8,10 +8,10 @@ namespace Crud_Login.models
 {
     internal class Usuario
     {
-        public long id { get; set; }
-        public string email{get;set;}
-        public string senha{get;set;}
 
+        public long id { get; set; }
+        public string email { get; set; }
+        public string senha { get; set; }
 
     }
 
