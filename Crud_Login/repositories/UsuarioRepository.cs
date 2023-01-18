@@ -1,55 +1,118 @@
-﻿using Crud_Login.models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Data;
+using Crud_Login.models;
+using MySql.Data.MySqlClient;
 
-namespace Crud_Login.repository {
+namespace Crud_Login {
     internal class UsuarioRepository : IUsuarioRepository {
 
-        public List<Usuario> usuarios { get; set; }
+        private const string bancoDados = "server=localhost;uid=usuario;pwd=;database=db_login;";
+        private MySqlConnection conexaoBd;
+        private MySqlCommand comando;
+        private const string criarTabelaUsuarioQuery = "CREATE TABLE IF NOT EXISTS usuario(" +
+                                                "id INT AUTO_INCREMENT," +
+                                                "email VARCHAR(180) NOT NULL," +
+                                                "senha VARCHAR(100) NOT NULL," +
+                                                "PRIMARY KEY(id));";
 
-        public UsuarioRepository() { 
-            usuarios = new List<Usuario>();
-        }
+        public UsuarioRepository() {
+            try {
+                conexaoBd = new MySqlConnection(bancoDados);
+                conexaoBd.Open();
+                comando = new MySqlCommand(criarTabelaUsuarioQuery, conexaoBd);
+                comando.ExecuteReader();
 
-        public void salvarUsuario(Usuario usuario) {
-            usuarios.Add(usuario);
-        }
-
-        public Usuario getUsuarioPorId(long id) { 
-            return usuarios.Find(item => item.id == id);
-        }
-
-        public bool atualizarUsuario(long id, Usuario usuario) {
-            Usuario encontrado = usuarios.Find(item => id == item.id);
-
-            if (encontrado == null) {
-                return false;   
+                Console.WriteLine("Conexão realizada com sucesso...");
+            } catch (Exception err) {
+                Console.WriteLine("Erro de conexão: " + err.Message);
+            } finally {
+                conexaoBd.Close();
             }
-
-            int index = usuarios.IndexOf(encontrado);
-
-            usuarios[index] = usuario;
-            return true;
         }
 
-        public bool existePorId(long id) {
-            return usuarios.Exists(item => item.id == id); 
+        public void salvar(Usuario usuario) {
+            string query = "INSERT INTO usuario(email, senha)" +
+                           "VALUES('" + usuario.email + "', '" + usuario.senha + "');";
+            executarComando(query);
         }
 
-        public bool deletarUsuario(long id) {
-            Usuario encontrado = usuarios.Find(item => id == item.id);
+        public void atualizar(Usuario usuario) {
+            throw new NotImplementedException();
+        }
 
-            if (encontrado == null) {
-                return false;
+        public void deletar(Usuario usuario) {
+            string query = "DELETE FROM usuario " +
+                "WHERE id = " + usuario.id + " OR email = '" + usuario.email + "';";
+            executarComando(query);
+        }
+
+        public Usuario getPorId(int id) {
+            string query = "SELECT * FROM usuario WHERE id = " + id + ";";
+
+            try {
+                conexaoBd.Open();
+                comando = new MySqlCommand(query, conexaoBd);
+                MySqlDataReader dados = comando.ExecuteReader();
+                dados.Read();
+
+                Usuario usuario = new Usuario(
+                            Convert.ToInt32(dados["id"]),
+                            dados["email"].ToString()!,
+                            dados["senha"].ToString()!
+                        );
+             
+
+                return usuario;
+
+            } catch (Exception err) {
+                Console.WriteLine("Erro de conexão: " + err.Message);
+            } finally {
+                conexaoBd.Close();
             }
+            return null!;
+        }
 
-            usuarios.Remove(encontrado);
-            return true;
+        public List<Usuario> getPorNome(string nome) {
+            throw new NotImplementedException();
+        }
+
+        public List<Usuario> getTodos() {
+            List<Usuario> usuarios = new List<Usuario>();
+            string query = "SELECT * FROM usuario;";
+
+            try {
+                conexaoBd.Open();
+                comando = new MySqlCommand(query, conexaoBd);
+                MySqlDataReader dados = comando.ExecuteReader();
+
+                while (dados.Read()) {
+                    usuarios.Add(new Usuario(
+                        Convert.ToInt32(dados["id"]),
+                        dados["email"].ToString()!,
+                        dados["senha"].ToString()!
+                    ));
+                }
+
+                return usuarios;
+            } catch(Exception err) {
+                Console.WriteLine("Erro de conexão: " + err.Message);
+            } finally {
+                conexaoBd.Close();
+            }
+            return null!;
+        }
+
+        private void executarComando(string query) {
+            try {
+                conexaoBd.Open();
+                comando = new MySqlCommand(query, conexaoBd);
+                comando.ExecuteReader();
+            } catch (Exception err) {
+                Console.WriteLine("Erro de conexão: " + err.Message);
+            } finally {
+                conexaoBd.Close();
+            }
         }
 
     }
-
 }

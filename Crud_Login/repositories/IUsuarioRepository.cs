@@ -1,18 +1,15 @@
 ﻿using Crud_Login.models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Crud_Login.repository {
+namespace Crud_Login {
     internal interface IUsuarioRepository {
 
-        void salvarUsuario(Usuario usuario);
-        Usuario getUsuarioPorId(long id);
-        bool atualizarUsuario(long id, Usuario usuario);
-        bool existePorId(long id);
-        bool deletarUsuario(long id);
+        public void salvar(Usuario usuario);
+        public void deletar(Usuario usuario);
+        public void atualizar(Usuario usuario);
+        public Usuario getPorId(int id);
+        public List<Usuario> getPorNome(string nome);
+        public List<Usuario> getTodos();
 
     }
 }

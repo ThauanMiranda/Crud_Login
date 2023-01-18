@@ -1,5 +1,4 @@
 ﻿using Crud_Login.models;
-using Crud_Login.repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +11,20 @@ namespace Crud_Login.services {
 
         IUsuarioRepository usuarioRepository = new UsuarioRepository();
 
-        public bool atualizarUsuario(long id, Usuario usuario) {
+        public bool atualizarUsuario(int id, Usuario usuario) {
             return true;
         }
 
-        public bool deletarUsuario(long id) {
+        public bool deletarUsuario(int id) {
             return true;
         }
 
-        public bool existePorId(long id) {
+        public bool existePorId(int id) {
             return true;
         }
 
-        public Usuario getUsuarioPorId(long id) {
-            return null;
+        public Usuario getUsuarioPorId(int id) {
+            return null!;
         }
 
         public void salvarUsuario(Usuario usuario) {

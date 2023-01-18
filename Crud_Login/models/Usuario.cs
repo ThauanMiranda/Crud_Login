@@ -9,9 +9,18 @@ namespace Crud_Login.models
     internal class Usuario
     {
 
-        public long id { get; set; }
+        public int id { get; set; }
         public string email { get; set; }
         public string senha { get; set; }
+
+        public Usuario() { 
+        }
+
+        public Usuario(int id, string email, string senha) {
+            this.id = id;   
+            this.email = email;
+            this.senha = senha;
+        }
 
     }
 
