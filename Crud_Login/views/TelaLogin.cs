@@ -18,5 +18,20 @@ namespace Crud_Login.views {
             TelaCadastro telaCadastro = new TelaCadastro();
             telaCadastro.Visible = true;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TelaLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSenha_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
