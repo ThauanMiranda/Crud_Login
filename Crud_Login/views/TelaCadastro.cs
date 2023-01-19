@@ -13,5 +13,25 @@ namespace Crud_Login.views {
         public TelaCadastro() {
             InitializeComponent();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TelaCadastro_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
