@@ -11,23 +11,37 @@ namespace Crud_Login.services {
 
         IUsuarioRepository usuarioRepository = new UsuarioRepository();
 
-        public bool atualizarUsuario(int id, Usuario usuario) {
-            return true;
+        public void atualizarUsuario(Usuario usuario) {
+            usuarioRepository.atualizar(usuario);
         }
 
         public bool deletarUsuario(int id) {
+            Usuario usuario = usuarioRepository.getPorId(id);
+            if (usuario == null) {
+                return false;
+            }
+            usuarioRepository.deletar(usuario);
             return true;
         }
 
         public bool existePorId(int id) {
+            Usuario usuario = usuarioRepository.getPorId(id);
+            if (usuario == null) {
+                return false;
+            }
             return true;
         }
 
         public Usuario getUsuarioPorId(int id) {
-            return null!;
+            return usuarioRepository.getPorId(id);
         }
 
-        public void salvarUsuario(Usuario usuario) {
+        public bool salvarUsuario(Usuario usuario) {
+            if (usuarioRepository.existePorEmail(usuario.email)) {
+                return false;
+            }
+            usuarioRepository.salvar(usuario);
+            return true;
         }
 
     }

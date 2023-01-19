@@ -9,6 +9,7 @@ namespace Crud_Login {
         public void atualizar(Usuario usuario);
         public Usuario getPorId(int id);
         public List<Usuario> getTodos();
+        public bool existePorEmail(string email);
 
     }
 }

@@ -50,6 +50,27 @@ namespace Crud_Login {
             executarComando(query);
         }
 
+        public bool existePorEmail(string email) {
+            string query = "SELECT * FROM usuario WHERE email = '" + email + "';";
+
+            try {
+                conexaoBd.Open();
+                comando = new MySqlCommand(query, conexaoBd);
+                MySqlDataReader dados = comando.ExecuteReader();
+                
+                if (dados.HasRows) {
+                    return true;
+                }
+
+            } catch (Exception err) {
+                Console.WriteLine("Erro de conexão: " + err.Message);
+            } finally {
+                conexaoBd.Close();
+            }
+
+            return false;
+        }
+
         public Usuario getPorId(int id) {
             string query = "SELECT * FROM usuario WHERE id = " + id + ";";
 

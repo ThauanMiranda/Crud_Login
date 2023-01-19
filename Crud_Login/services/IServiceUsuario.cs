@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace Crud_Login.services {
     internal interface IServiceUsuario {
 
-        void salvarUsuario(Usuario usuario);
+        bool salvarUsuario(Usuario usuario);
         Usuario getUsuarioPorId(int id);
-        bool atualizarUsuario(int id, Usuario usuario);
+        void atualizarUsuario(Usuario usuario);
         bool existePorId(int id);
         bool deletarUsuario(int id);
 
