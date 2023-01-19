@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Crud_Login.services {
-    internal interface IServiceUsuario {
+    public interface IServiceUsuario {
 
         bool salvarUsuario(Usuario usuario);
         Usuario getUsuarioPorId(int id);
         void atualizarUsuario(Usuario usuario);
         bool existePorId(int id);
         bool deletarUsuario(int id);
+        bool validarLogin(Usuario usuario);
 
     }
 }

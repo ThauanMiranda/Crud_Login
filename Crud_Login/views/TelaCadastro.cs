@@ -21,7 +21,10 @@ namespace Crud_Login.views {
 
         private void btnCadastrar_Click(object sender, EventArgs e) {
             Usuario usuario = new Usuario(txtEmail.Text, txtSenha.Text);
-            serviceUsuario.salvarUsuario(usuario); 
+            serviceUsuario.salvarUsuario(usuario);
+            this.Visible = false;
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.Visible = true;
         }
     }
 }

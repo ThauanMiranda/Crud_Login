@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Crud_Login.models;
+using Crud_Login.services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,8 +12,12 @@ using System.Windows.Forms;
 
 namespace Crud_Login.views {
     public partial class TelaLogin : Form {
+
+        private IServiceUsuario serviceUsuario;
+
         public TelaLogin() {
             InitializeComponent();
+            serviceUsuario = new ServiceUsuario();
         }
 
         private void btnCadastro_Click(object sender, EventArgs e) {
@@ -19,19 +25,17 @@ namespace Crud_Login.views {
             telaCadastro.Visible = true;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+        private void btnLogin_Click(object sender, EventArgs e) {
+            Usuario usuario = new Usuario(txtEmail.Text, txtSenha.Text);
 
-        }
+            if (serviceUsuario.validarLogin(usuario)) {
+                TelaPrincipal telaPrincipal = new TelaPrincipal(usuario);
+                this.Visible = false;
+                telaPrincipal.Visible = true;
+                return;
+            }
 
-        private void TelaLogin_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSenha_Click(object sender, EventArgs e)
-        {
-
+            MessageBox.Show("Senha ou email incorreto.");
         }
     }
 }

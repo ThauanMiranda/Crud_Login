@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Crud_Login.services {
-    internal class ServiceUsuario : IServiceUsuario {
+    public class ServiceUsuario : IServiceUsuario {
 
         IUsuarioRepository usuarioRepository = new UsuarioRepository();
 
@@ -36,7 +36,27 @@ namespace Crud_Login.services {
             return usuarioRepository.getPorId(id);
         }
 
+        public bool validarLogin(Usuario usuario) {
+            Usuario validar = usuarioRepository.getPorEmail(usuario.email);
+            if (validar == null) {
+                return false;
+            }
+            if (!(validar.email.Equals(usuario.email))) {
+                return false;
+            }
+            if (!(validar.senha.Equals(usuario.senha))) {
+                return false;
+            }
+            return true;
+        }
+
         public bool salvarUsuario(Usuario usuario) {
+            if (usuario.email.Length <= 0) { 
+                return false; 
+            }
+            if (usuario.senha.Length <= 0) {
+                return false;
+            }
             if (usuarioRepository.existePorEmail(usuario.email)) {
                 return false;
             }

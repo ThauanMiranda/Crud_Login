@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crud_Login.models
 {
-    internal class Usuario
+    public class Usuario
     {
 
         public int id { get; set; }
