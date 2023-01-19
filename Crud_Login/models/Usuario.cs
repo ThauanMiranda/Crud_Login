@@ -22,6 +22,11 @@ namespace Crud_Login.models
             this.senha = senha;
         }
 
+        public Usuario(string email, string senha) {
+            this.email = email;
+            this.senha = senha;
+        }
+
     }
 
 }

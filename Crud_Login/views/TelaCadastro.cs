@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Crud_Login.models;
+using Crud_Login.services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,28 +12,16 @@ using System.Windows.Forms;
 
 namespace Crud_Login.views {
     public partial class TelaCadastro : Form {
+
+        private IServiceUsuario serviceUsuario = new ServiceUsuario();
+
         public TelaCadastro() {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TelaCadastro_Load(object sender, EventArgs e)
-        {
-
+        private void btnCadastrar_Click(object sender, EventArgs e) {
+            Usuario usuario = new Usuario(txtEmail.Text, txtSenha.Text);
+            serviceUsuario.salvarUsuario(usuario); 
         }
     }
 }
