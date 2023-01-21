@@ -36,11 +36,13 @@ namespace Crud_Login {
             executarComando(query);
         }
 
-        public void atualizar(Usuario usuario) {
+        public void atualizar(string email, Usuario usuario) {
+            int id = getPorEmail(email).id;
+
             string query = "UPDATE usuario SET " +
                 "email = '" + usuario.email + "', " +
                 "senha = '" + usuario.senha + "'" +
-                "WHERE id = " + usuario.id + ";";
+                "WHERE id = " + id + ";";
             executarComando(query);
         }
 

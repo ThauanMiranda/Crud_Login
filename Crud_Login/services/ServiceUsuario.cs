@@ -11,8 +11,8 @@ namespace Crud_Login.services {
 
         IUsuarioRepository usuarioRepository = new UsuarioRepository();
 
-        public void atualizarUsuario(Usuario usuario) {
-            usuarioRepository.atualizar(usuario);
+        public void atualizarUsuario(string email, Usuario usuario) {
+            usuarioRepository.atualizar(email, usuario);
         }
 
         public bool deletarUsuario(int id) {

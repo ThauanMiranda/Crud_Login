@@ -26,7 +26,20 @@ namespace Crud_Login.views {
         }
 
         private void btnLogin_Click(object sender, EventArgs e) {
-            Usuario usuario = new Usuario(txtEmail.Text, txtSenha.Text);
+            string email = txtEmail.Text;
+            string senha = txtSenha.Text;
+            
+            if (String.IsNullOrEmpty(email)) {
+                MessageBox.Show("O campo do e-mail está vázio.");
+                return;
+            }
+
+            if (String.IsNullOrEmpty(senha)) {
+                MessageBox.Show("O campo da senha está vázio.");
+                return;
+            }
+
+            Usuario usuario = new Usuario(email, senha);
 
             if (serviceUsuario.validarLogin(usuario)) {
                 TelaPrincipal telaPrincipal = new TelaPrincipal(usuario);
@@ -34,8 +47,8 @@ namespace Crud_Login.views {
                 telaPrincipal.Visible = true;
                 return;
             }
-
-            MessageBox.Show("Senha ou email incorreto.");
+            MessageBox.Show("Os dados informados estão incorretos, tente novamente.");
         }
+
     }
 }

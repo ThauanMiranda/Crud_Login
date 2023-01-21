@@ -10,7 +10,7 @@ namespace Crud_Login.services {
 
         bool salvarUsuario(Usuario usuario);
         Usuario getUsuarioPorId(int id);
-        void atualizarUsuario(Usuario usuario);
+        void atualizarUsuario(string email, Usuario usuario);
         bool existePorId(int id);
         bool deletarUsuario(int id);
         bool validarLogin(Usuario usuario);
